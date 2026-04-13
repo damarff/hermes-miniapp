@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hermes Terminal</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1a2e; color: #fff; padding: 20px; min-height: 100vh;
+        }
+        h1 { color: #4CAF50; margin-bottom: 20px; }
+        #status { 
+            padding: 20px; background: #16213e; border-radius: 12px; 
+            margin: 20px 0; border-left: 4px solid #4CAF50;
+        }
+        .ok { color: #4CAF50; }
+        .error { color: #f44336; }
+        button { 
+            padding: 12px 24px; background: #4CAF50; color: white; 
+            border: none; border-radius: 8px; cursor: pointer; font-size: 16px;
+        }
+        button:hover { background: #45a049; }
+        #info { margin-top: 20px; padding: 15px; background: #0f3460; border-radius: 8px; }
+        pre { white-space: pre-wrap; word-break: break-all; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <h1>🤖 Hermes Terminal</h1>
+    <div id="status">Loading Telegram SDK...</div>
+    <div id="info" style="display:none;"></div>
+    <button onclick="testWebApp()" style="display:none;" id="testBtn">Test WebApp</button>
+
+    <script>
+        const statusDiv = document.getElementById('status');
+        const infoDiv = document.getElementById('info');
+        const testBtn = document.getElementById('testBtn');
+        
+        function updateStatus(msg, isError = false) {
+            statusDiv.innerHTML = '<span class="' + (isError ? 'error' : 'ok') + '">' + msg + '</span>';
+        }
+        
+        function initApp() {
+            if (!window.Telegram || !window.Telegram.WebApp) {
+                updateStatus('❌ Telegram SDK not loaded', true);
+                infoDiv.innerHTML = '<p>Please open this in Telegram Mini App</p>';
+                infoDiv.style.display = 'block';
+                return;
+            }
+            
+            const WebApp = window.Telegram.WebApp;
+            updateStatus('✅ Telegram SDK loaded!');
+            
+            const initData = WebApp.initData || 'None';
+            const user = WebApp.initDataUnsafe?.user;
+            const version = WebApp.version || 'unknown';
+            const platform = WebApp.platform || 'unknown';
+            
+            infoDiv.innerHTML = '<h3>Telegram Info:</h3>' +
+                '<p><strong>Platform:</strong> ' + platform + '</p>' +
+                '<p><strong>Version:</strong> ' + version + '</p>' +
+                '<p><strong>User ID:</strong> ' + (user?.id || 'not available') + '</p>' +
+                '<p><strong>Username:</strong> @' + (user?.username || 'not available') + '</p>';
+            infoDiv.style.display = 'block';
+            testBtn.style.display = 'inline-block';
+            
+            WebApp.ready();
+            WebApp.expand();
+            WebApp.setHeaderColor('#1a1a2e');
+        }
+        
+        function testWebApp() {
+            const WebApp = window.Telegram?.WebApp;
+            if (WebApp) {
+                WebApp.HapticFeedback?.impactOccurred('light');
+                WebApp.showPopup({
+                    title: 'Test',
+                    message: 'WebApp is working!',
+                    buttons: [{id: 'ok', type: 'ok'}]
+                });
+            }
+        }
+        
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initApp);
+        } else {
+            initApp();
+        }
+    </script>
+</body>
+</html>
