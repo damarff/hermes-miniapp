@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hermes Terminal</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body { background: #1a1a2e; color: #fff; padding: 20px; font-family: sans-serif; }
+        h1 { color: #4CAF50; }
+        .log { background: #16213e; padding: 15px; border-radius: 8px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>🤖 Hermes Terminal</h1>
+    <div id="log" class="log">Loading...</div>
+    
+<script>
+    const log = document.getElementById('log');
+    
+    function add(msg) {
+        log.innerHTML += '<p>' + msg + '</p>';
+    }
+    
+    if (window.Telegram && window.Telegram.WebApp) {
+        const wa = window.Telegram.WebApp;
+        add('✅ Telegram WebApp loaded');
+        add('Version: ' + wa.version);
+        add('Platform: ' + wa.platform);
+        
+        const user = wa.initDataUnsafe?.user;
+        if (user) {
+            add('User: @' + user.username);
+        }
+        
+        wa.ready();
+        wa.expand();
+        add('✅ App initialized');
+    } else {
+        log.innerHTML = '<p style="color:red">❌ Telegram WebApp not available. Open in Telegram.</p>';
+    }
+</script>
+</body>
+</html>
