@@ -1,0 +1,54 @@
+/* System UI Font Override - More readable for daily use */
+:root,
+:host {
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  --font-mono: ui-monospace, SFMono-Regular, "Cascadia Mono", "Fira Code", Menlo, Consolas, monospace !important;
+  --font-display: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  --font-expanded: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  --font-compressed: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  --text-xs: 0.8rem !important;
+  --text-sm: 0.9rem !important;
+  --text-base: 1rem !important;
+  --text-lg: 1.15rem !important;
+  --text-xl: 1.3rem !important;
+  --text-2xl: 1.5rem !important;
+  --leading-normal: 1.6 !important;
+  --leading-relaxed: 1.75 !important;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-display,
+.font-expanded,
+.font-compressed,
+.font-collapse {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+}
+
+.font-mono,
+.font-courier {
+  font-family: ui-monospace, SFMono-Regular, "Cascadia Mono", "Fira Code", Menlo, Consolas, monospace !important;
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, "Cascadia Mono", Menlo, Consolas, monospace !important;
+  font-size: 0.9em !important;
+}
+
+.text-muted-foreground,
+.text-muted-foreground\/50,
+.text-muted-foreground\/60,
+.text-muted-foreground\/70 {
+  color: oklch(0.75 0.02 200) !important;
+}
+
+.text-\[9px\] { font-size: 0.7rem !important; }
+.text-\[10px\] { font-size: 0.75rem !important; }
+.text-\[11px\] { font-size: 0.8rem !important; }
+.text-\[0\.6rem\] { font-size: 0.7rem !important; }
+.text-\[0\.65rem\] { font-size: 0.75rem !important; }
+.text-\[0\.7rem\] { font-size: 0.8rem !important; }
