@@ -941,7 +941,9 @@ body {
 
 <script>
 const WebApp = window.Telegram?.WebApp;
-const API = window.location.origin;
+// Allow gateway URL override via URL param: ?gw=https://your-server:8642
+const _gwParam = new URLSearchParams(window.location.search).get('gw');
+const API = _gwParam || window.location.origin;
 const CS = WebApp?.CloudStorage;
 
 if (WebApp) { WebApp.ready(); WebApp.expand(); }
