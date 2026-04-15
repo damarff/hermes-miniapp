@@ -941,8 +941,8 @@ body {
 
 <script>
 const WebApp = window.Telegram?.WebApp;
-// Gateway URL: hardcoded cloudflare tunnel (HTTPS), update when tunnel changes
-const API = 'https://height-shortly-blend-sunshine.trycloudflare.com';
+// Gateway URL: hardcoded ngrok tunnel (HTTPS), update when tunnel changes
+const API = 'https://brook-finishing-unthread.ngrok-free.dev';
 const CS = WebApp?.CloudStorage;
 
 if (WebApp) { WebApp.ready(); WebApp.expand(); }
@@ -1203,6 +1203,8 @@ function headers(extra) {
 async function fetchWithTimeout(url, { method='GET', headers={}, body=null, timeout=15000 } = {}) {
   const ctrl = new AbortController();
   const id = setTimeout(() => ctrl.abort(), timeout);
+  // Skip ngrok browser warning page
+  if (!headers['ngrok-skip-browser-warning']) headers['ngrok-skip-browser-warning'] = 'true';
   try {
     const r = await fetch(url, { method, headers, body, signal: ctrl.signal });
     clearTimeout(id);
