@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://telegram.org; style-src 'self' 'unsafe-inline'; connect-src *; img-src * data: blob:; font-src 'self'; frame-ancestors *; base-uri 'self'; form-action 'self';">
 <title>Hermes Terminal</title>
-<script src="https://telegram.org/js/telegram-web-app.js?62" integrity="sha384-1XuC9S4cgk6RH1oCsL2diDRwLiiivu/oZHNfxYUitEFuiKpP5ceNbzu220KKrcK+" crossorigin="anonymous"></script>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
 <style>
 :root {
   --bg: var(--tg-theme-bg-color, #0d0d14);
@@ -941,9 +941,8 @@ body {
 
 <script>
 const WebApp = window.Telegram?.WebApp;
-// Allow gateway URL override via URL param: ?gw=https://your-server:8642
-const _gwParam = new URLSearchParams(window.location.search).get('gw');
-const API = _gwParam || window.location.origin;
+// Gateway URL: hardcoded cloudflare tunnel (HTTPS), update when tunnel changes
+const API = 'https://solar-reunion-idea-pursuant.trycloudflare.com';
 const CS = WebApp?.CloudStorage;
 
 if (WebApp) { WebApp.ready(); WebApp.expand(); }
