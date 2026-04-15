@@ -941,8 +941,8 @@ body {
 
 <script>
 const WebApp = window.Telegram?.WebApp;
-// Gateway URL: hardcoded ngrok tunnel (HTTPS), update when tunnel changes
-const API = 'https://brook-finishing-unthread.ngrok-free.dev';
+// Same-origin API (miniapp served by proxy on same domain)
+const API = window.location.origin;
 const CS = WebApp?.CloudStorage;
 
 if (WebApp) { WebApp.ready(); WebApp.expand(); }
